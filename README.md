@@ -17,6 +17,6 @@
 <p>Este repositorio tiene como objetivo mostrar nuestras habilidades y progreso como desarrolladores, proporcionando ejemplos concretos de nuestro trabajo conjunto y permitiendo una fácil reutilización de componentes en futuros proyectos.</p>
 <h3>Colaboradores</h3>
 <ul>
-  <li><a href="https://github.com/AngelLopez03" target="_blank">Angel Gabriel López Alarcón</a></li>
-  <li><a href="https://github.com/encchris" target="_blank">Christian Rafael López Alarcón</a></li>
+  <li><a href="https://github.com/AngelLopez03">Angel Gabriel López Alarcón</a></li>
+  <li><a href="https://github.com/encchris">Christian Rafael López Alarcón</a></li>
 </ul>
