@@ -9,6 +9,7 @@
 | `textButton` | `string`                      | El texto del botón de envío    | No        |
 | `inputs`     | `Array<{label?: string, className?: string, type: string, placeholder?: string, name: string, id: string, clearable?: boolean, toggleable?: boolean, required: boolean, pattern? string }>` | Lista de objetos de entrada que definen los campos del formulario        | Sí       |
 | `submit`     | `(data: { values: any; event?: FormEvent<HTMLFormElement> }) => void` | Función que se llama cuando se envía el formulario. Incluye valores y evento | Sí        |
+
 ## Ejemplo de uso:
 ```tsx
 
