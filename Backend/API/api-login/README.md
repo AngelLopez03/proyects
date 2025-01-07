@@ -67,65 +67,65 @@ Al crear las rutas no olvides usar-importar los archivos:
 ## Autenticación con Sanctum
 1 **En caso de no tener sanctum instalado utiliza el comando de composer.** 
 
-    ```bash
-    composer require laravel/sanctum
-    ```
+```bash
+composer require laravel/sanctum
+```
 
 2 **Publicar la configuración y las migraciones de Sanctum:**
-    Ejecuta los siguientes comandos:
+Ejecuta los siguientes comandos:
 
-    ```bash
-    php artisan vendor:publish --provider="Laravel\Sanctum\SanctumServiceProvider"
-    php artisan migrate
-    ```
+```bash
+php artisan vendor:publish --provider="Laravel\Sanctum\SanctumServiceProvider"
+php artisan migrate
+```
 
-    El primer comando publica el archivo de configuración de Sanctum `(config/sanctum.php)` y el segundo ejecuta las migraciones que crea la tabla `personal_access_tokens` en tu base de datos, que es donde se almacenan los tokens de Sanctum.
+El primer comando publica el archivo de configuración de Sanctum `(config/sanctum.php)` y el segundo ejecuta las migraciones que crea la tabla `personal_access_tokens` en tu base de datos, que es donde se almacenan los tokens de Sanctum.
 
 3 **Agregar el trait `HasApiTokens` al modelo `User`**:
 
-    Abre tu modelo `User` (generalmente en `app/Models/User.php`) y agrega el trait `HasApiTokens`:
+Abre tu modelo `User` (generalmente en `app/Models/User.php`) y agrega el trait `HasApiTokens`:
 
-    ```php
-    <?php
+```php
+<?php
 
-    namespace App\Models;
+namespace App\Models;
 
-    use Illuminate\Database\Eloquent\Factories\HasFactory;
-    use Illuminate\Foundation\Auth\User as Authenticatable;
-    use Illuminate\Notifications\Notifiable;
-    use Laravel\Sanctum\HasApiTokens; // Importa el trait
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
+use Laravel\Sanctum\HasApiTokens; // Importa el trait
 
-    class User extends Authenticatable
-    {
-        use HasApiTokens, HasFactory, Notifiable; // Usa el trait
-        // ... (resto del código del modelo)
-    }
-    ```
+class User extends Authenticatable
+{
+    use HasApiTokens, HasFactory, Notifiable; // Usa el trait
+    // ... (resto del código del modelo)
+}
+```
 
 4 **Configurar el middleware `EnsureFrontendRequestsAreStateful` en caso de que uses la api en un dominio diferente:**
-    Este middleware es crucial para que Sanctum funcione correctamente, especialmente si tu frontend está en un dominio diferente al de tu API. Asegúrate de que esté configurado en el grupo de middleware `api` en bootstrap/app.php:
+Este middleware es crucial para que Sanctum funcione correctamente, especialmente si tu frontend está en un dominio diferente al de tu API. Asegúrate de que esté configurado en el grupo de middleware `api` en bootstrap/app.php:
 
-    ```php
-    protected $middlewareGroups = [
-        'api' => [
-            \App\Http\Middleware\EnsureFrontendRequestsAreStateful::class, // Asegúrate de que esté aquí
-            'throttle:api',
-        ],
-        'web' => [
-            // ... Grupo de rutas
-        ],
-    ];
-    ```
+```php
+protected $middlewareGroups = [
+    'api' => [
+        \App\Http\Middleware\EnsureFrontendRequestsAreStateful::class, // Asegúrate de que esté aquí
+        'throttle:api',
+    ],
+    'web' => [
+        // ... Grupo de rutas
+    ],
+];
+```
 
 5 **Limpiar la caché**
-    Después de realizar estos cambios, es una buena práctica limpiar la caché de la aplicación:
+Después de realizar estos cambios, es una buena práctica limpiar la caché de la aplicación:
 
-    ```bash
-    php artisan cache:clear
-    php artisan config:clear
-    php artisan route:clear
-    php artisan view:clear
-    ```
+```bash
+php artisan cache:clear
+php artisan config:clear
+php artisan route:clear
+php artisan view:clear
+```
 
 6 **Reiniciar el Servidor de Desarrollo: `php artisan serve`.**
 
