@@ -7,12 +7,12 @@ laravel new nombre-del-proyecto
 ```
 
 ## Preparar la base de datos a utilizar en el archivo .env
-DB_CONNECTION=mysql
-DB_HOST=`ruta-host`
-DB_PORT=`puerto`
-DB_DATABASE=`nombre-base-de-datos`
-DB_USERNAME=`usuario`
-DB_PASSWORD=`password`
+DB_CONNECTION=mysql <br>
+DB_HOST=`ruta-host` <br>
+DB_PORT=`puerto` <br>
+DB_DATABASE=`nombre-base-de-datos` <br>
+DB_USERNAME=`usuario` <br>
+DB_PASSWORD=`password` <br>
 
 APP_KEY=`puedes-usar-el-comando-de-artisan`
 
@@ -45,13 +45,13 @@ php artisan make:request LoginRequest
 ```
 
 ## Nota.
-No olvides usar-importar los archivos:
-    * `use App\Http\Requests\CreateUserRequest;`
-    * `use App\Http\Requests\LoginRequest;`
-    * `use App\Models\User;`
-    * `use Illuminate\Http\JsonResponse;`
-    * `use Illuminate\Support\Facades\Auth;`
-    * `use Illuminate\Support\Facades\Hash;`
+No olvides usar-importar los archivos: <br>
+    * `use App\Http\Requests\CreateUserRequest;` <br>
+    * `use App\Http\Requests\LoginRequest;` <br>
+    * `use App\Models\User;` <br>
+    * `use Illuminate\Http\JsonResponse;` <br>
+    * `use Illuminate\Support\Facades\Auth;` <br>
+    * `use Illuminate\Support\Facades\Hash;` <br>
 
 ## Preparar la ruta api.php
 En caso de que no tengas el archivo api.php en routes, usa el comando artisan: install:api y realiza la migracion correspondiente
@@ -65,13 +65,13 @@ Al crear las rutas no olvides usar-importar los archivos:
     * `use App\Http\Controllers\AuthController;`
 
 ## Autenticación con Sanctum
-    * En caso de no tener sanctum instalado utiliza el comando de composer.
+1 **En caso de no tener sanctum instalado utiliza el comando de composer.** 
 
     ```bash
     composer require laravel/sanctum
     ```
 
-    * Publicar la configuración y las migraciones de Sanctum:
+2 **Publicar la configuración y las migraciones de Sanctum:**
     Ejecuta los siguientes comandos:
 
     ```bash
@@ -81,7 +81,7 @@ Al crear las rutas no olvides usar-importar los archivos:
 
     El primer comando publica el archivo de configuración de Sanctum `(config/sanctum.php)` y el segundo ejecuta las migraciones que crea la tabla `personal_access_tokens` en tu base de datos, que es donde se almacenan los tokens de Sanctum.
 
-    * Agregar el trait `HasApiTokens` al modelo `User`:
+3 **Agregar el trait `HasApiTokens` al modelo `User`**:
 
     Abre tu modelo `User` (generalmente en `app/Models/User.php`) y agrega el trait `HasApiTokens`:
 
@@ -102,7 +102,7 @@ Al crear las rutas no olvides usar-importar los archivos:
     }
     ```
 
-    * Configurar el middleware `EnsureFrontendRequestsAreStateful` en caso de que uses la api en un dominio diferente:
+4 **Configurar el middleware `EnsureFrontendRequestsAreStateful` en caso de que uses la api en un dominio diferente:**
     Este middleware es crucial para que Sanctum funcione correctamente, especialmente si tu frontend está en un dominio diferente al de tu API. Asegúrate de que esté configurado en el grupo de middleware `api` en bootstrap/app.php:
 
     ```php
@@ -117,7 +117,7 @@ Al crear las rutas no olvides usar-importar los archivos:
     ];
     ```
 
-    * Limpiar la caché
+5 **Limpiar la caché**
     Después de realizar estos cambios, es una buena práctica limpiar la caché de la aplicación:
 
     ```bash
@@ -127,7 +127,7 @@ Al crear las rutas no olvides usar-importar los archivos:
     php artisan view:clear
     ```
 
-    * Reiniciar el Servidor de Desarrollo: `php artisan serve`.
+6 **Reiniciar el Servidor de Desarrollo: `php artisan serve`.**
 
 ## Registrar un usuario `/create - POST`
 
