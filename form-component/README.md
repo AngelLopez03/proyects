@@ -1,5 +1,7 @@
 # Form component React + TypeScript + TailwindCSS
 
+[![npm version](https://img.shields.io/npm/v/@modular-web/rc-form.svg)](https://www.npmjs.com/package/@modular-web/rc-form)
+
 ## Descripción
 **FormComponent** es un componente de formulario flexible y personalizable construido con React, TypeScript y TailwindCSS. Este componente te permite crear formularios rápidamente y de manera eficiente, con la capacidad de personalizar los inputs, el título del formulario y el texto del botón de envío. Además, cuenta con soporte para `children`, permitiéndote agregar contenido adicional abajo del formulario, como enlaces para registro de nuevos usuarios o métodos alternativos de inicio de sesión.
 
