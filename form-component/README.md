@@ -14,13 +14,13 @@
 Puedes instalar el paquete utilizando npm. Ejecuta el siguiente comando en tu terminal:
 
 ```bash
-npm install tu-componente-real
+npm install @modular-web/rc-form
 ```
 
 O si prefieres usar Yarn, puedes instalarlo con el siguiente comando:
 
 ```bash
-yarn add tu-componente-real
+yarn add @modular-web/rc-form
 ```
 
 ## Props
