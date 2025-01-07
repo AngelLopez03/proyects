@@ -1,4 +1,133 @@
-# API de Autenticación
+# API de Autenticación Laravel 11
+
+## Preparar el proyecto con Laravel 11
+Instala Laravel con el siguiente comando
+```bash
+laravel new nombre-del-proyecto
+```
+
+## Preparar la base de datos a utilizar en el archivo .env
+DB_CONNECTION=mysql <br>
+DB_HOST=`ruta-host` <br>
+DB_PORT=`puerto` <br>
+DB_DATABASE=`nombre-base-de-datos` <br>
+DB_USERNAME=`usuario` <br>
+DB_PASSWORD=`password` <br>
+
+APP_KEY=`puedes-usar-el-comando-de-artisan`
+
+```bash
+php artisan key:generate
+```
+
+## Nota.
+No olvides realizar la migración a la base de datos, usa el comando artisan:
+
+```bash
+php artisan migrate
+```
+
+## Crea el controlador AuthController.php
+Utiliza el comando artisan make:controller
+
+```bash
+php artisan make:controller AuthController
+```
+
+## Crea los Requests CreateUserRequest.php y LoginRequest.php
+Utiliza el comando artisan make:request
+
+```bash
+php artisan make:request CreateUserRequest
+```
+```bash
+php artisan make:request LoginRequest
+```
+
+## Nota.
+No olvides usar-importar los archivos: <br>
+    * `use App\Http\Requests\CreateUserRequest;` <br>
+    * `use App\Http\Requests\LoginRequest;` <br>
+    * `use App\Models\User;` <br>
+    * `use Illuminate\Http\JsonResponse;` <br>
+    * `use Illuminate\Support\Facades\Auth;` <br>
+    * `use Illuminate\Support\Facades\Hash;` <br>
+
+## Preparar la ruta api.php
+En caso de que no tengas el archivo api.php en routes, usa el comando artisan: install:api y realiza la migracion correspondiente
+
+```bash
+php artisan install:api
+```
+
+## Nota.
+Al crear las rutas no olvides usar-importar los archivos:
+    * `use App\Http\Controllers\AuthController;`
+
+## Autenticación con Sanctum
+1 **En caso de no tener sanctum instalado utiliza el comando de composer.** 
+
+```bash
+composer require laravel/sanctum
+```
+
+2 **Publicar la configuración y las migraciones de Sanctum:**
+Ejecuta los siguientes comandos:
+
+```bash
+php artisan vendor:publish --provider="Laravel\Sanctum\SanctumServiceProvider"
+php artisan migrate
+```
+
+El primer comando publica el archivo de configuración de Sanctum `(config/sanctum.php)` y el segundo ejecuta las migraciones que crea la tabla `personal_access_tokens` en tu base de datos, que es donde se almacenan los tokens de Sanctum.
+
+3 **Agregar el trait `HasApiTokens` al modelo `User`**:
+
+Abre tu modelo `User` (generalmente en `app/Models/User.php`) y agrega el trait `HasApiTokens`:
+
+```php
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
+use Laravel\Sanctum\HasApiTokens; // Importa el trait
+
+class User extends Authenticatable
+{
+    use HasApiTokens, HasFactory, Notifiable; // Usa el trait
+    // ... (resto del código del modelo)
+}
+```
+
+4 **Configurar el middleware `EnsureFrontendRequestsAreStateful` en caso de que uses la api en un dominio diferente:**
+Este middleware es crucial para que Sanctum funcione correctamente, especialmente si tu frontend está en un dominio diferente al de tu API. Asegúrate de que esté configurado en el grupo de middleware `api` en bootstrap/app.php:
+
+```php
+protected $middlewareGroups = [
+    'api' => [
+        \App\Http\Middleware\EnsureFrontendRequestsAreStateful::class, // Asegúrate de que esté aquí
+        'throttle:api',
+    ],
+    'web' => [
+        // ... Grupo de rutas
+    ],
+];
+```
+
+5 **Limpiar la caché**
+Después de realizar estos cambios, es una buena práctica limpiar la caché de la aplicación:
+
+```bash
+php artisan cache:clear
+php artisan config:clear
+php artisan route:clear
+php artisan view:clear
+```
+
+6 **Reiniciar el Servidor de Desarrollo: `php artisan serve`.**
 
 ## Registrar un usuario `/create - POST`
 
