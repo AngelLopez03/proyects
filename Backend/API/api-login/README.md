@@ -1,4 +1,10 @@
-# API de Autenticación
+# API de Autenticación Laravel 11
+
+## Preparar el proyecto con Laravel 11
+Instala Laravel con con siguiente bash en windows
+```bash
+laravel new nombre-del-proyecto
+```
 
 ## Registrar un usuario `/create - POST`
 
