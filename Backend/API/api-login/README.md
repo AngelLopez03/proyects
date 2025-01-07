@@ -1,6 +1,6 @@
 # API de Autenticación
 
-## Registrar un usuario (/create - POST)
+## Registrar un usuario `/create - POST`
 
 | Parámetro | Tipo    | Requerido | Descripción                     |
 | :-------- | :------ | :-------- | :------------------------------ |
@@ -15,7 +15,7 @@
 | 201    | Registro exitoso       | `{"status": true, "message": "User created successfully","token": "token_generado"}`    |
 | 500    | Error de validación    | `{"status": false, "message": "getMessage"}`                                            |
 
-## Login de un usuario (/login - POST)
+## Login de un usuario `/login - POST`
 
 | Parámetro | Tipo    | Requerido | Descripción                     |
 | :-------- | :------ | :-------- | :------------------------------ |
