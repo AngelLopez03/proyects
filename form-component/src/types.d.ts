@@ -1,6 +1,6 @@
 import { FormEvent } from "react";
 
-type SubmitFunction = (data: {values: typeof values; event: FormEvent<HTMLFormElement>}) => void;
+export type SubmitFunction = (data: {values: typeof values; event: FormEvent<HTMLFormElement>}) => void;
 
 export interface Form {
     /**
@@ -66,3 +66,4 @@ export interface Inputs {
 }
 
 export interface IconProps extends React.SVGProps<SVGSVGElement> {}
+declare module '@modular-web/rc-form';
