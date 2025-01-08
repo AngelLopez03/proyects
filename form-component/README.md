@@ -30,16 +30,29 @@ yarn add @modular-web/rc-form
 |--------------|-------------------------------|--------------------------------|-----------|
 | `title`      | `string`                      | El título del formulario       | No        |
 | `textButton` | `string`                      | El texto del botón de envío    | No        |
-| `inputs`     | `Array<{label?: string, className?: string, type: string, placeholder?: string, name: string, id: string, clearable?: boolean, toggleable?: boolean, required: boolean, pattern? string }>` | Lista de objetos de entrada que definen los campos del formulario        | Sí       |
+| `inputs`     | [`Array<{...}>`](#composición-del-array-inputs) | Lista de objetos de entrada que definen los campos del formulario        | Sí       |
 | `submit`     | `(data: { values: any; event?: FormEvent<HTMLFormElement> }) => void` | Función que se llama cuando se envía el formulario. Incluye valores y evento | Sí        |
 | `Children`   | `JSX`                         | Aquí puedes agregar cualquier jsx debajo del formulario | Sí       |
+
+### Composición del Array `inputs`
+| Prop       | Tipo       | Descripción       | Opcional |
+|------------|------------|-------------------|----------|
+| `id`       | `string`   | Identificador único para el campo | No        |
+| `name`     | `string`   | Nombre del campo | No        |
+| `type`     | `string`   | Tipo de campo (ej: 'text', 'password', etc.) | No        |
+| `required` | `boolean`   | Si el campo es obligatorio | No        |
+| `label`    | `string`   | Etiqueta para el campo | Sí        |
+| `className`| `string`   | Clases de CSS (ej: 'text-[#333]') | Sí        |
+| `placeholder`| `string`   | Texto de marcador de posición en el campo | Sí        |
+| `clearable`| `boolean`   | Si se puede limpiar el campo (por defecto `false`) | Sí      |
+| `toggleable`| `boolean`   | Mostrar/ocultar contraseña (solo aplica para campos de tipo `password`)| Sí       |
+| `pattern`  | `string`   | Patrón para validar la entrada | Sí       |
 
 ## Ejemplo de uso:
 ```tsx
 
 import React from 'react';
-import FormComponent from 'FormComponent';
-import { Inputs } from './types';
+import {FormComponent, Inputs} from '@modular-web/rc-form';
 
 const inputs:Array<Inputs> = [
   {
@@ -53,8 +66,8 @@ const inputs:Array<Inputs> = [
     className: 'text-[#333]', // Clases de tailwindcss
     placeholder: 'Ingresa tu username',
     clearable: true, // Si quieres activar el limpiar el campo
-    toggleable: false, // Sirve para mostrar o ocultar contraseña solo sirve para el campo de tipo password
-  }
+  },
+  // ... Agrega todos los campos que necesites
 ]
 
 function App() {
@@ -72,6 +85,10 @@ function App() {
 
 export default App;
 ```
+#### En este ejemplo:
+* Importamos el componente `FormComponent` y el tipo `Inputs` desde el paquete `@modular-web/rc-form`.
+* Definimos un arreglo de inputs con los campos necesarios para el formulario.
+* Utilizamos el componente `FormComponent` en el componente principal `App`, pasando las propiedades `title`, `textButton`, `inputs` y `submit`.
 
 ## Contribuir
 Si desea contribuir a este proyecto, por favor sigue los siguientes pasos:
@@ -82,5 +99,5 @@ Si desea contribuir a este proyecto, por favor sigue los siguientes pasos:
 5. Abre un Pull Request.
 
 ## Licencia
-Este proyecto está licenciado bajo la Licencia MIT. Para más detalles, consulta el archivo [LICENSE](./LICENSE).
+Este proyecto está licenciado bajo la Licencia MIT. Para más detalles, consulta el archivo [LICENSE](./LICENSE.md).
 [MIT](https://choosealicense.com/licenses/mit/)
