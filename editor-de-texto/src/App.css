@@ -1,0 +1,18 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+/*html {
+    overflow: hidden; /* Evita el desplazamiento de la página con el zoom 
+}
+
+body {
+    overscroll-behavior: none; /*Desactivar el comportamiento de desplazamiento
+    zoom: 100%; /*Resetea el zoom del navegador
+}*/
